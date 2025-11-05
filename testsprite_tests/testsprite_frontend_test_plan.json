@@ -1,0 +1,517 @@
+[
+  {
+    "id": "TC001",
+    "title": "User Sign Up with Valid Data",
+    "description": "Verify that a new user can successfully sign up with valid email and password, and that their profile is created with default settings.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the sign-up page"
+      },
+      {
+        "type": "action",
+        "description": "Enter a valid email and a strong password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the sign-up form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that the user is redirected to the dashboard page"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that a new profile is created in the database with default settings"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Sign In with Correct Credentials",
+    "description": "Verify that a user can sign in successfully using valid credentials and access their personalized dashboard.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the sign-in page"
+      },
+      {
+        "type": "action",
+        "description": "Input valid registered email and password"
+      },
+      {
+        "type": "action",
+        "description": "Click the sign-in button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user lands on their personalized dashboard with widgets"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that the session is active and persisted for subsequent requests"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Sign In with Incorrect Password",
+    "description": "Verify that signing in with an incorrect password results in a meaningful error and no access to user data.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Go to the sign-in page"
+      },
+      {
+        "type": "action",
+        "description": "Enter valid email but incorrect password"
+      },
+      {
+        "type": "action",
+        "description": "Click sign-in"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that a clear invalid credentials message is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user is not granted access to dashboard or data"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Dashboard Weather Widget Displays Accurate Data",
+    "description": "Verify that the Dashboard weather widget shows accurate, up-to-date weather information retrieved from the Open-Meteo API based on user location.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Sign in and navigate to the dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that the weather widget loads with current weather data"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify weather information corresponds to Open-Meteo data for the user's location"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that the widget refreshes weather data on manual refresh or on schedule"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Task Manager - Create, Update, and Drag-and-Drop Tasks",
+    "description": "Verify that users can create new tasks, set priorities and due dates, update task details, and reorder tasks via drag-and-drop functionality on the Kanban board with persistence.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Go to the Task Manager page"
+      },
+      {
+        "type": "action",
+        "description": "Create a new task with title, description, priority and due date"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that the new task appears in the correct column on the Kanban board"
+      },
+      {
+        "type": "action",
+        "description": "Edit the task to update priority and due date"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the task updates are reflected immediately"
+      },
+      {
+        "type": "action",
+        "description": "Drag the task to a different column on the Kanban board"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the task is moved visually and state updates on the backend"
+      },
+      {
+        "type": "action",
+        "description": "Reload the page"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the task and its updated state persist after reload"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Calendar Module - Event Creation and Multi-View Navigation",
+    "description": "Verify that users can create calendar events, view and navigate between month, week, and day views and that events persist correctly with accurate details.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the calendar page"
+      },
+      {
+        "type": "action",
+        "description": "Switch between month, week, and day views"
+      },
+      {
+        "type": "assertion",
+        "description": "Validate that calendar view updates correspondingly with correct layout"
+      },
+      {
+        "type": "action",
+        "description": "Create a new event with title, time, date, and optional description"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the event appears on the correct date and time slot in all views"
+      },
+      {
+        "type": "action",
+        "description": "Access the event history widget and validate the created event is listed"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that the event data matches creation inputs"
+      },
+      {
+        "type": "action",
+        "description": "Reload the calendar page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that events persist and are displayed correctly after reload"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Finance Tracker - Add Income and Expenses, Validate Cashflow and Budget",
+    "description": "Verify input of various income and expense entries updates cashflow and budget calculations correctly, and data persists with accurate summaries.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Finance Tracker page"
+      },
+      {
+        "type": "action",
+        "description": "Add a new income entry with category, amount, and date"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify income appears in the income list and total income updates accordingly"
+      },
+      {
+        "type": "action",
+        "description": "Add an expense with category, amount, and date"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm expenses list updates and total expenses reflect the new entry"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify cashflow calculation equals income minus expenses"
+      },
+      {
+        "type": "action",
+        "description": "Set or update budget limits for a category"
+      },
+      {
+        "type": "assertion",
+        "description": "Check budget usage visualization updates to reflect current spend relative to budget"
+      },
+      {
+        "type": "action",
+        "description": "Reload the page"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm all financial data and calculations persist after reload"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "AI Copilot - Chat Interaction and Function Calls",
+    "description": "Verify that the AI Copilot assistant responds correctly to user queries, streams responses, executes function calls such as createTask and scheduleEvent, and integrates with retrieval-augmented generation.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the AI Copilot chat interface"
+      },
+      {
+        "type": "action",
+        "description": "Send a command to create a new task with details"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the AI streams a response acknowledging the task creation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the task is actually created and listed in the Task Manager"
+      },
+      {
+        "type": "action",
+        "description": "Send a request to schedule a calendar event"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm AI response streams and event is created in calendar"
+      },
+      {
+        "type": "action",
+        "description": "Ask AI for budgeting analysis"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the AI returns a relevant budget analysis summary based on user data"
+      },
+      {
+        "type": "action",
+        "description": "Request a news summarization"
+      },
+      {
+        "type": "assertion",
+        "description": "Check the AI returns a coherent news summary using RAG integration"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Notification System - Real-time Delivery and Management",
+    "description": "Verify that notifications for tasks, events, and system updates are delivered in real-time, are displayed in the notification sidebar, and can be marked as read or responded to properly.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Trigger a notification such as a task due alert or event reminder"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the notification appears immediately in the notification sidebar"
+      },
+      {
+        "type": "action",
+        "description": "Open the notification sidebar"
+      },
+      {
+        "type": "action",
+        "description": "Mark one or more notifications as read"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that the notification count decrements and UI updates accordingly"
+      },
+      {
+        "type": "action",
+        "description": "Respond to actionable notifications if applicable"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that actions are correctly handled and notification removed or updated"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Responsive Layout and Theme Toggle Functionality",
+    "description": "Verify that the application layout adapts correctly on various device screen sizes and that theme toggling between light and dark modes works consistently across all components.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the application on desktop browser"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that layout displays full sidebar, topbar and widgets as designed"
+      },
+      {
+        "type": "action",
+        "description": "Resize the browser to tablet and mobile widths"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the bottom navigation bar and hamburger menu appear appropriately on smaller devices"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the theme switcher to dark mode"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI colors update to dark theme consistently across pages and components"
+      },
+      {
+        "type": "action",
+        "description": "Toggle back to light mode"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI reverts to light theme correctly"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "External API Integration - News and Stocks Data Display",
+    "description": "Verify that news and stock data retrieved via GNews and Alpha Vantage APIs display correctly and refresh regularly on the Dashboard widgets.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the Dashboard page with news and stocks widgets"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the news headlines and brief summaries load from GNews API"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that stock quotes and charts display with Alpha Vantage data"
+      },
+      {
+        "type": "action",
+        "description": "Manually refresh or wait for auto refresh interval"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that fresh data is loaded and displayed without errors"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Profile Management - Update Avatar and Account Details",
+    "description": "Verify users can update their profile information including avatar image upload, name, and preferences, with changes saved and reflected in the UI.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to account settings page"
+      },
+      {
+        "type": "action",
+        "description": "Upload a new avatar image"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new avatar is displayed immediately and saved in user profile"
+      },
+      {
+        "type": "action",
+        "description": "Update account details such as display name and email preferences"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify changes are saved successfully and reflect on user profile UI"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Security - Ensure Row Level Security (RLS) Enforces Data Isolation",
+    "description": "Verify that users can only access their own data and cannot query or modify data owned by other users due to implementation of RLS policies on the database schema.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login as User A and attempt to access User B's task or event via direct API or UI manipulation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify access is denied or data is not returned"
+      },
+      {
+        "type": "action",
+        "description": "Try SQL queries or API calls that bypass UI to retrieve or update other users' data"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm RLS prevents unauthorized data access or mutation"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Screen Time Tracking - Data Accuracy and API Response",
+    "description": "Verify that the screen time tracking API accurately records user activity periods and that the screentime widget displays this data correctly on the dashboard.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Sign in and use the application for a measured period"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that the screentime widget displays activity data matching the usage period"
+      },
+      {
+        "type": "action",
+        "description": "Call the screen time tracking API directly"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm the API returns accurate and properly formatted screen time data"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Help & Contact Support - Submit Contact Form Successfully",
+    "description": "Verify that users can fill in and submit the contact form on the Help page and receive confirmation that their request was sent successfully.",
+    "category": "functional",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Help & Contact page"
+      },
+      {
+        "type": "action",
+        "description": "Fill in required fields with valid inputs in the contact form"
+      },
+      {
+        "type": "action",
+        "description": "Submit the contact form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify successful submission message appears"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that the backend API processes and stores the contact message"
+      }
+    ]
+  }
+]

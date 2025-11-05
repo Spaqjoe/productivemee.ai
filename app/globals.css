@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Light Theme - Spec */
+    --background: 0 0% 100%; /* #ffffff */
+    --foreground: 220 15% 10%;
+    --card: 210 5% 85%; /* #d7d9db */
+    --card-foreground: 220 15% 10%;
+    --popover: 210 5% 85%;
+    --popover-foreground: 220 15% 10%;
+    --primary: 215 71% 48%; /* #246cd1 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 5% 85%;
+    --secondary-foreground: 220 15% 10%;
+    --muted: 210 5% 85%;
+    --muted-foreground: 220 10% 40%;
+    --accent: 210 5% 85%;
+    --accent-foreground: 220 15% 10%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 8% 55%;
+    --input: 210 5% 90%;
+    --ring: 215 71% 48%;
+    --radius: 0.5rem;
+    --sidebar: 195 13% 6%; /* #0e1112 */
+    --sidebar-foreground: 0 0% 100%;
+
+    /* Charts */
+    --chart-1: 215 71% 48%;
+    --chart-2: 142 76% 36%;
+    --chart-3: 24 95% 53%;
+    --chart-4: 346 77% 50%;
+    --chart-5: 270 91% 65%;
+  }
+
+  .dark {
+    /* Dark Theme - Spec */
+    --background: 195 13% 6%; /* #0e1112 */
+    --foreground: 210 40% 98%;
+    --card: 230 8% 16%; /* #25262b */
+    --card-foreground: 210 40% 98%;
+    --popover: 230 8% 16%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 215 71% 48%; /* #246cd1 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 230 8% 16%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 230 8% 16%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 230 8% 16%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 230 8% 24%;
+    --input: 230 8% 16%;
+    --ring: 215 71% 48%;
+    --sidebar: 230 8% 16%;
+    --sidebar-foreground: 0 0% 100%;
+
+    /* Charts */
+    --chart-1: 215 71% 48%;
+    --chart-2: 142 70% 50%;
+    --chart-3: 24 90% 60%;
+    --chart-4: 346 75% 60%;
+    --chart-5: 270 85% 75%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}
+
+/* Custom utilities for circular progress */
+.circular-progress {
+  transform: rotate(-90deg);
+}
+
+/* Utilities */
+/* Hide scrollbars for horizontal mini calendar strips on mobile */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

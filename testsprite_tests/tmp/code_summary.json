@@ -1,0 +1,184 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "Next.js 16 (App Router)",
+    "React 19",
+    "Tailwind CSS",
+    "Supabase (PostgreSQL + Auth + Storage)",
+    "shadcn/ui",
+    "React Icons",
+    "Recharts",
+    "React Query",
+    "pgvector",
+    "OpenAI-compatible AI",
+    "Model Context Protocol (MCP)"
+  ],
+  "features": [
+    {
+      "name": "Dashboard",
+      "description": "Main dashboard page with widgets for weather, activity graphs, sticky notes, news, stocks, and screen time tracking",
+      "files": [
+        "app/dashboard/page.tsx",
+        "components/dashboard/weather-widget.tsx",
+        "components/dashboard/activity-graph.tsx",
+        "components/dashboard/sticky-notes-widget.tsx",
+        "components/dashboard/news-widget.tsx",
+        "components/dashboard/stocks-widget.tsx",
+        "components/dashboard/screentime-widget.tsx"
+      ]
+    },
+    {
+      "name": "Task Manager",
+      "description": "Kanban board with drag-and-drop functionality, task priorities, due dates, and task management with My Tasks, Recent Tasks, and Performance widgets",
+      "files": [
+        "app/tasks/page.tsx",
+        "app/tasks/layout.tsx"
+      ]
+    },
+    {
+      "name": "Calendar",
+      "description": "Calendar system with month, week, and day views, event creation, event history, and mini-calendar widget",
+      "files": [
+        "app/calendar/page.tsx",
+        "app/calendar/page-full.tsx",
+        "app/calendar/layout.tsx",
+        "components/calendar/mini-calendar.tsx",
+        "components/calendar/event-history.tsx"
+      ]
+    },
+    {
+      "name": "Finance Tracker",
+      "description": "Financial management page with widgets for income, expenses, cashflow tracking, and budget management",
+      "files": [
+        "app/finance/page.tsx",
+        "app/finance/layout.tsx"
+      ]
+    },
+    {
+      "name": "AI Copilot",
+      "description": "AI assistant with chat sidebar, streaming responses, function calling (createTask, updateTask, scheduleEvent, analyzeBudget, summarizeNews, screenTimeAdvice), and RAG integration with Supabase",
+      "files": [
+        "app/api/ai/copilot.ts",
+        "app/api/ai/actions.ts",
+        "components/layout/topbar.tsx"
+      ]
+    },
+    {
+      "name": "Authentication",
+      "description": "User authentication system with sign-in and sign-up pages using Supabase Auth",
+      "files": [
+        "app/auth/sign-in/page.tsx",
+        "app/auth/sign-up/page.tsx",
+        "lib/supabase/client.ts",
+        "lib/supabase/server.ts",
+        "lib/supabase/middleware.ts",
+        "middleware.ts"
+      ]
+    },
+    {
+      "name": "Layout Components",
+      "description": "Application layout with sidebar, topbar, and responsive mobile layout with bottom navigation",
+      "files": [
+        "components/layout/app-layout.tsx",
+        "components/layout/sidebar-expandable.tsx",
+        "components/layout/sidebar.tsx",
+        "components/layout/topbar.tsx",
+        "app/layout.tsx"
+      ]
+    },
+    {
+      "name": "Settings",
+      "description": "Settings page with tabs for Account, Notifications, and Language preferences",
+      "files": [
+        "app/settings/page.tsx",
+        "app/settings/layout.tsx"
+      ]
+    },
+    {
+      "name": "Help & Contact",
+      "description": "Help page with contact form for user support",
+      "files": [
+        "app/help/page.tsx",
+        "app/help/layout.tsx",
+        "app/api/contact/route.ts"
+      ]
+    },
+    {
+      "name": "Notifications System",
+      "description": "Real-time notification system with notification sidebar, notifications API, and notification management",
+      "files": [
+        "app/api/notifications/route.ts",
+        "components/layout/topbar.tsx"
+      ]
+    },
+    {
+      "name": "External API Integrations",
+      "description": "Integration with external APIs for weather, news, and stocks data",
+      "files": [
+        "app/api/weather/route.ts",
+        "app/api/news/route.ts",
+        "app/api/stocks/route.ts"
+      ]
+    },
+    {
+      "name": "Screen Time Tracking",
+      "description": "Screen time tracking API for monitoring user activity",
+      "files": [
+        "app/api/screentime/route.ts"
+      ]
+    },
+    {
+      "name": "MCP Endpoint",
+      "description": "Model Context Protocol endpoint for AI module to query user data securely",
+      "files": [
+        "app/api/mcp/route.ts"
+      ]
+    },
+    {
+      "name": "Theme System",
+      "description": "Dark and light theme system with CSS variables and theme provider",
+      "files": [
+        "app/globals.css",
+        "components/theme-provider.tsx",
+        "tailwind.config.ts"
+      ]
+    },
+    {
+      "name": "UI Components",
+      "description": "Reusable UI components built with shadcn/ui and Radix UI primitives",
+      "files": [
+        "components/ui/avatar.tsx",
+        "components/ui/badge.tsx",
+        "components/ui/button.tsx",
+        "components/ui/card.tsx",
+        "components/ui/circular-progress.tsx",
+        "components/ui/dialog.tsx",
+        "components/ui/dropdown-menu.tsx",
+        "components/ui/input.tsx",
+        "components/ui/progress.tsx",
+        "components/ui/sheet.tsx",
+        "hooks/use-toast.ts"
+      ]
+    },
+    {
+      "name": "Database Schema",
+      "description": "Supabase PostgreSQL database schema with tables for profiles, tasks, events, reminders, budgets, notifications, screentime, and AI sessions",
+      "files": [
+        "lib/supabase/schema.sql",
+        "lib/supabase/migrations/001_add_priority_to_events.sql",
+        "lib/supabase/migrations/002_ai_schema.sql",
+        "lib/supabase/storage.sql",
+        "lib/supabase/trigger.sql"
+      ]
+    },
+    {
+      "name": "Mobile Responsive Layout",
+      "description": "Mobile-specific layout with bottom navigation bar, hamburger menu, and responsive design",
+      "files": [
+        "components/layout/topbar.tsx",
+        "components/layout/app-layout.tsx"
+      ]
+    }
+  ]
+}
+

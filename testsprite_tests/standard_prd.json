@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "project": "Productive Me",
+    "date": "2025-10-29",
+    "prepared_by": "Software Development Manager"
+  },
+  "product_overview": "Productive Me is a comprehensive personal productivity dashboard designed to help users monitor and manage their activities, screen time, tasks, calendar events, financial budgets, and receive real-time notifications within a streamlined and user-friendly interface. It integrates AI assistance and external data sources including weather, news, and stock information to enhance decision-making and personal efficiency.",
+  "core_goals": [
+    "Provide a centralized dashboard aggregating key personal productivity metrics including weather, activity tracking, and financial overviews.",
+    "Enable efficient task management with a Kanban board supporting drag-and-drop, task prioritization, and due dates.",
+    "Offer a robust calendar system for event creation, viewing, and history, supporting multiple views (month, week, day).",
+    "Facilitate personal finance tracking including income, expenses, cashflow, and budget management.",
+    "Deliver an AI-powered assistant to support users in task scheduling, budgeting analysis, event creation, news summarization, and screen time advice.",
+    "Implement a secure and user-friendly authentication flow with profile management.",
+    "Support responsive design and theme customization for an optimal user experience across devices and preferences."
+  ],
+  "key_features": [
+    "Dashboard featuring widgets for weather updates, activity graphs, sticky notes, news, stocks, and screen time tracking.",
+    "Task Manager with a Kanban board enabling drag-and-drop, task prioritization, due date management, and performance insights.",
+    "Calendar module with month, week, and day views, event creation, event history, and a mini-calendar widget.",
+    "Finance Tracker to manage budgets, income, expenses, and cashflow, helping users maintain financial health.",
+    "AI Copilot assistant with chat interface, streaming response, function calling (e.g., createTask, scheduleEvent, analyzeBudget), and retrieval-augmented generation integration.",
+    "Real-time notifications system delivering alerts for tasks, events, and system updates with a dedicated notification sidebar.",
+    "User authentication via Supabase including sign-in, sign-up, session management, and profile customization with avatar uploads.",
+    "Mobile-responsive layouts with a bottom navigation bar, hamburger menu, and theme toggling supporting dark and light modes.",
+    "Integration with external APIs such as Open-Meteo for weather, GNews for news, and Alpha Vantage for stock data."
+  ],
+  "user_flow_summary": [
+    "Users sign up or sign in using email/password authentication, then access a personalized dashboard aggregating all productivity data.",
+    "Users navigate to the Task Manager to create, prioritize, update, and track tasks using a drag-and-drop Kanban board.",
+    "Users create and view calendar events across multiple views (month/week/day), review event history, and use mini-calendar widgets for quick navigation.",
+    "Users manage their finances by inputting income and expenses, setting budgets, tracking cashflow, and viewing summarized financial analytics.",
+    "Users interact with the AI Copilot assistant to receive help with scheduling, budgeting analysis, news summarization, and personalized advice on screen time management.",
+    "Users receive and manage real-time notifications through the notification sidebar, marking notifications as read and responding as needed.",
+    "Users customize app settings including account details, notifications preferences, and language settings.",
+    "Users access help and support through a contact form, receiving assistance from the support team as needed."
+  ],
+  "validation_criteria": [
+    "Successful user authentication with secure session management and profile handling.",
+    "Accurate and real-time display of dashboard widgets including weather, activity graphs, news, and screen time data.",
+    "Smooth drag-and-drop functionality in the Task Manager with correct task updating and persistence.",
+    "Correct rendering and interaction of calendar views and event management functionalities.",
+    "Comprehensive finance tracker calculations reflecting income, expenses, budgets, and cashflow accurately.",
+    "Reliable AI Copilot responses with appropriate function calls executed successfully and chat interface streaming.",
+    "Real-time notification delivery and correct notification management workflows.",
+    "Responsive UI adapting appropriately on mobile devices with theme toggling functional across all components.",
+    "Seamless integration and data retrieval from external APIs for weather, news, and stocks.",
+    "Robust database schema enforcing RLS to ensure data isolation per user."
+  ],
+  "code_summary": {
+    "tech_stack": [
+      "TypeScript",
+      "Next.js 16 (App Router)",
+      "React 19",
+      "Tailwind CSS",
+      "Supabase (PostgreSQL + Auth + Storage)",
+      "shadcn/ui",
+      "React Icons",
+      "Recharts",
+      "React Query",
+      "pgvector",
+      "OpenAI-compatible AI",
+      "Model Context Protocol (MCP)"
+    ],
+    "features": [
+      {
+        "name": "Dashboard",
+        "description": "Main dashboard page with widgets for weather, activity graphs, sticky notes, news, stocks, and screen time tracking",
+        "files": [
+          "app/dashboard/page.tsx",
+          "components/dashboard/weather-widget.tsx",
+          "components/dashboard/activity-graph.tsx",
+          "components/dashboard/sticky-notes-widget.tsx",
+          "components/dashboard/news-widget.tsx",
+          "components/dashboard/stocks-widget.tsx",
+          "components/dashboard/screentime-widget.tsx"
+        ]
+      },
+      {
+        "name": "Task Manager",
+        "description": "Kanban board with drag-and-drop functionality, task priorities, due dates, and task management with My Tasks, Recent Tasks, and Performance widgets",
+        "files": [
+          "app/tasks/page.tsx",
+          "app/tasks/layout.tsx"
+        ]
+      },
+      {
+        "name": "Calendar",
+        "description": "Calendar system with month, week, and day views, event creation, event history, and mini-calendar widget",
+        "files": [
+          "app/calendar/page.tsx",
+          "app/calendar/page-full.tsx",
+          "app/calendar/layout.tsx",
+          "components/calendar/mini-calendar.tsx",
+          "components/calendar/event-history.tsx"
+        ]
+      },
+      {
+        "name": "Finance Tracker",
+        "description": "Financial management page with widgets for income, expenses, cashflow tracking, and budget management",
+        "files": [
+          "app/finance/page.tsx",
+          "app/finance/layout.tsx"
+        ]
+      },
+      {
+        "name": "AI Copilot",
+        "description": "AI assistant with chat sidebar, streaming responses, function calling (createTask, updateTask, scheduleEvent, analyzeBudget, summarizeNews, screenTimeAdvice), and RAG integration with Supabase",
+        "files": [
+          "app/api/ai/copilot.ts",
+          "app/api/ai/actions.ts",
+          "components/layout/topbar.tsx"
+        ]
+      },
+      {
+        "name": "Authentication",
+        "description": "User authentication system with sign-in and sign-up pages using Supabase Auth",
+        "files": [
+          "app/auth/sign-in/page.tsx",
+          "app/auth/sign-up/page.tsx",
+          "lib/supabase/client.ts",
+          "lib/supabase/server.ts",
+          "lib/supabase/middleware.ts",
+          "middleware.ts"
+        ]
+      },
+      {
+        "name": "Layout Components",
+        "description": "Application layout with sidebar, topbar, and responsive mobile layout with bottom navigation",
+        "files": [
+          "components/layout/app-layout.tsx",
+          "components/layout/sidebar-expandable.tsx",
+          "components/layout/sidebar.tsx",
+          "components/layout/topbar.tsx",
+          "app/layout.tsx"
+        ]
+      },
+      {
+        "name": "Settings",
+        "description": "Settings page with tabs for Account, Notifications, and Language preferences",
+        "files": [
+          "app/settings/page.tsx",
+          "app/settings/layout.tsx"
+        ]
+      },
+      {
+        "name": "Help & Contact",
+        "description": "Help page with contact form for user support",
+        "files": [
+          "app/help/page.tsx",
+          "app/help/layout.tsx",
+          "app/api/contact/route.ts"
+        ]
+      },
+      {
+        "name": "Notifications System",
+        "description": "Real-time notification system with notification sidebar, notifications API, and notification management",
+        "files": [
+          "app/api/notifications/route.ts",
+          "components/layout/topbar.tsx"
+        ]
+      },
+      {
+        "name": "External API Integrations",
+        "description": "Integration with external APIs for weather, news, and stocks data",
+        "files": [
+          "app/api/weather/route.ts",
+          "app/api/news/route.ts",
+          "app/api/stocks/route.ts"
+        ]
+      },
+      {
+        "name": "Screen Time Tracking",
+        "description": "Screen time tracking API for monitoring user activity",
+        "files": [
+          "app/api/screentime/route.ts"
+        ]
+      },
+      {
+        "name": "MCP Endpoint",
+        "description": "Model Context Protocol endpoint for AI module to query user data securely",
+        "files": [
+          "app/api/mcp/route.ts"
+        ]
+      },
+      {
+        "name": "Theme System",
+        "description": "Dark and light theme system with CSS variables and theme provider",
+        "files": [
+          "app/globals.css",
+          "components/theme-provider.tsx",
+          "tailwind.config.ts"
+        ]
+      },
+      {
+        "name": "UI Components",
+        "description": "Reusable UI components built with shadcn/ui and Radix UI primitives",
+        "files": [
+          "components/ui/avatar.tsx",
+          "components/ui/badge.tsx",
+          "components/ui/button.tsx",
+          "components/ui/card.tsx",
+          "components/ui/circular-progress.tsx",
+          "components/ui/dialog.tsx",
+          "components/ui/dropdown-menu.tsx",
+          "components/ui/input.tsx",
+          "components/ui/progress.tsx",
+          "components/ui/sheet.tsx",
+          "hooks/use-toast.ts"
+        ]
+      },
+      {
+        "name": "Database Schema",
+        "description": "Supabase PostgreSQL database schema with tables for profiles, tasks, events, reminders, budgets, notifications, screentime, and AI sessions",
+        "files": [
+          "lib/supabase/schema.sql",
+          "lib/supabase/migrations/001_add_priority_to_events.sql",
+          "lib/supabase/migrations/002_ai_schema.sql",
+          "lib/supabase/storage.sql",
+          "lib/supabase/trigger.sql"
+        ]
+      },
+      {
+        "name": "Mobile Responsive Layout",
+        "description": "Mobile-specific layout with bottom navigation bar, hamburger menu, and responsive design",
+        "files": [
+          "components/layout/topbar.tsx",
+          "components/layout/app-layout.tsx"
+        ]
+      }
+    ]
+  }
+}

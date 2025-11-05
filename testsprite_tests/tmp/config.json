@@ -1,0 +1,16 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "executionArgs": {
+    "projectName": "ProductiveMe",
+    "projectPath": "/Users/jessejoe/Desktop/ProductiveMe",
+    "testIds": [],
+    "additionalInstruction": "The application should now be running on localhost:3000. Please execute all test cases to validate functionality, identify bugs, and check for any glitches or problems.",
+    "envs": {
+      "API_KEY": "sk-user-JLAZGv2LSjJv8BH3gQQ21rzouE89HHlsr28PeoMdt6bQLwfxy1DJQQQ7pRv15G3GkIq5FmRCt68WPgdmKrZSgBWZlWbIqI3vKXcSmedz1zC1HH0qDTGbLnLG6dxZt_SjWCE"
+    }
+  },
+  "proxy": "http://74cb4839-4efa-4e38-9042-2ba9bcbad05e:NhWkhv7pC9bZoz7V7t7zCTNrgZvxoIiq@tun.testsprite.com:8080"
+}
