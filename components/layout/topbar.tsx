@@ -251,7 +251,7 @@ export function Topbar() {
   };
 
   return (
-    <nav className="h-16 md:bg-[hsl(var(--card))] md:border md:border-border md:rounded-lg mx-4 my-4 flex items-center justify-between px-4 md:px-6">
+    <nav className="h-16 md:bg-[hsl(var(--card))] md:rounded-lg mx-4 my-4 flex items-center justify-between px-4 md:px-6">
       <div className="flex items-center space-x-3 md:space-x-4">
         <Button variant="ghost" size="icon" className="md:hidden cursor-pointer" aria-label="Open menu" onClick={() => setMobileMenuOpen(true)}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5"><path d="M3.75 5.25h16.5v1.5H3.75v-1.5Zm0 6h16.5v1.5H3.75v-1.5Zm0 6h16.5v1.5H3.75v-1.5Z" /></svg>

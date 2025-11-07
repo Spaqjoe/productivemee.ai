@@ -33,7 +33,7 @@ export function SidebarExpandable() {
         <aside
             className={cn(
                 "relative rounded-lg mt-4 ml-4 mb-24 md:mb-4 h-[calc(100vh-2rem)] transition-all duration-300 ease-in-out hidden md:block",
-                isHovered ? "w-64 text-[hsl(var(--sidebar-foreground))] bg-[hsl(var(--sidebar))] border border-border" : "w-20 text-[hsl(var(--sidebar-foreground))] bg-[hsl(var(--sidebar))] border border-border"
+                isHovered ? "w-64 text-[hsl(var(--sidebar-foreground))] bg-[hsl(var(--sidebar))]" : "w-20 text-[hsl(var(--sidebar-foreground))] bg-[hsl(var(--sidebar))]"
             )}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
