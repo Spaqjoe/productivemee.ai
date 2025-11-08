@@ -32,13 +32,15 @@ export function SidebarExpandable() {
     return (
         <aside
             className={cn(
-                "relative rounded-lg mt-4 ml-4 mb-24 md:mb-4 h-[calc(100vh-2rem)] transition-all duration-300 ease-in-out hidden md:block",
-                isHovered ? "w-64 text-[hsl(var(--sidebar-foreground))] bg-[hsl(var(--sidebar))]" : "w-20 text-[hsl(var(--sidebar-foreground))] bg-[hsl(var(--sidebar))]"
+                "relative hidden md:block mt-4 ml-4 mb-24 md:mb-4 h-[calc(100vh-2rem)] overflow-hidden rounded-3xl border border-white/10 bg-[hsl(var(--sidebar))] text-[hsl(var(--sidebar-foreground))] shadow-[0_20px_60px_-30px_rgba(2,132,199,0.35)] backdrop-blur-2xl transition-all duration-300 ease-in-out",
+                isHovered ? "w-64" : "w-20"
             )}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <nav className="p-6 flex flex-col h-full">
+            <span className="pointer-events-none absolute inset-[-40%] bg-[radial-gradient(circle_at_center,rgba(14,116,144,0.35),transparent_60%)] opacity-70" />
+            <span className="pointer-events-none absolute -inset-24 animate-liquid-pulse bg-[conic-gradient(from_200deg_at_50%_50%,rgba(14,116,144,0.3),rgba(129,140,248,0.12),rgba(236,72,153,0.18),rgba(14,116,144,0.3))] blur-3xl" />
+            <nav className="relative z-10 p-6 flex flex-col h-full">
                 {/* Logo */}
                 <div className="mb-8 flex items-center gap-3 overflow-hidden">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-lg">

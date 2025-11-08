@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { CardButton } from "@/components/ui/card-button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -281,14 +282,10 @@ export default function TasksPage() {
           <h1 className="text-3xl font-bold">Task Manager</h1>
           <p className="text-muted-foreground">Organize your tasks with a Kanban board</p>
         </div>
-        <Button
-          variant="default"
-          onClick={openCreateDialog}
-          className="bg-primary hover:bg-primary/90 text-primary-foreground"
-        >
-          <RxPlus className="mr-2" />
-          New Task
-        </Button>
+        <CardButton onClick={openCreateDialog}>
+          <RxPlus className="h-4 w-4" />
+          <span>New Task</span>
+        </CardButton>
       </div>
 
       {/* Three widgets layout */}
@@ -316,7 +313,7 @@ export default function TasksPage() {
                         draggable
                         onDragStart={(e) => handleDragStart(e, task)}
                       >
-                        <CardContent className="p-4 bg-[hsl(var(--background))] border-r rounded-lg">
+                        <CardContent className="p-4 bg-[hsl(var(--background-solid))] border-r rounded-lg">
                           <div className="flex items-start gap-2">
                             <MdDragIndicator className="h-5 w-5 text-muted-foreground mt-0.5 flex-shrink-0" />
                             <div className="flex-1">

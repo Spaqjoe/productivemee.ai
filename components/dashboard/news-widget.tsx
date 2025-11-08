@@ -11,6 +11,13 @@ export function NewsWidget() {
     const fetchNews = async () => {
       try {
         const response = await fetch("/api/news?topic=world&max=3");
+        const contentType = response.headers.get("content-type") ?? "";
+
+        if (!response.ok || !contentType.includes("application/json")) {
+          const errorBody = await response.text();
+          throw new Error(`News API response invalid (${response.status}). Body: ${errorBody.slice(0, 120)}`);
+        }
+
         const data = await response.json();
         setNews(data.articles || []);
       } catch (error) {

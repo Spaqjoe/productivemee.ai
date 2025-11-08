@@ -2,15 +2,42 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { CardButton } from "@/components/ui/card-button";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useMemo, useState } from "react";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
+import { RxPlus } from "react-icons/rx";
 
 type Txn = { id: string; kind: "income" | "expense"; amount: number; created_at?: string; note?: string };
+
+const budgetFieldConfig = [
+  { key: "income", label: "Income" },
+  { key: "rent", label: "Rent" },
+  { key: "bills", label: "Bills" },
+  { key: "subscriptions", label: "Subscriptions" },
+  { key: "food", label: "Food" },
+  { key: "personal_expenses", label: "Personal Expenses" },
+  { key: "investment", label: "Investment" },
+  { key: "emergency_savings", label: "Emergency Savings" },
+] as const;
+
+type BudgetFieldKey = typeof budgetFieldConfig[number]["key"];
+type BudgetFormState = Record<BudgetFieldKey, string>;
+
+const createEmptyBudgetForm = (): BudgetFormState =>
+  budgetFieldConfig.reduce((acc, field) => {
+    acc[field.key] = "";
+    return acc;
+  }, {} as BudgetFormState);
 
 export default function FinancePage() {
   const [txns, setTxns] = useState<Txn[]>([]);
   const [loading, setLoading] = useState(true);
+  const [budgetDialogOpen, setBudgetDialogOpen] = useState(false);
+  const [budgetForm, setBudgetForm] = useState<BudgetFormState>(() => createEmptyBudgetForm());
+  const [budgetSubmitting, setBudgetSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,9 +99,24 @@ export default function FinancePage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Finance Tracker</h1>
-        <p className="text-muted-foreground">Track your monthly income and expenses</p>
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Finance Tracker</h1>
+          <p className="text-muted-foreground">Track your monthly income and expenses</p>
+        </div>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <CardButton
+            type="button"
+            onClick={() => setBudgetDialogOpen(true)}
+            className="min-w-[160px]"
+          >
+            <RxPlus className="h-4 w-4" />
+            <span>New Budget</span>
+          </CardButton>
+          <Button onClick={exportXml} className="bg-primary text-primary-foreground hover:bg-primary/90">
+            Export XML
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -125,9 +167,105 @@ export default function FinancePage() {
         </CardContent>
       </Card>
 
-      <div className="flex justify-end">
-        <Button onClick={exportXml} className="bg-primary text-primary-foreground hover:bg-primary/90">Export XML</Button>
-      </div>
+      <Dialog
+        open={budgetDialogOpen}
+        onOpenChange={(open) => {
+          setBudgetDialogOpen(open);
+          if (!open) setBudgetForm(createEmptyBudgetForm());
+        }}
+      >
+        <DialogContent
+          onClose={() => {
+            setBudgetDialogOpen(false);
+            setBudgetForm(createEmptyBudgetForm());
+          }}
+          className="rounded-3xl border border-white/10 bg-white/5 text-white shadow-[0_30px_80px_-40px_rgba(79,70,229,0.55)] backdrop-blur"
+        >
+          <DialogHeader>
+            <DialogTitle>Create Budget</DialogTitle>
+            <DialogDescription className="text-white/70">
+              Allocate your income across categories to track spending goals.
+            </DialogDescription>
+          </DialogHeader>
+          <form
+            className="space-y-4"
+            onSubmit={async (event) => {
+              event.preventDefault();
+              try {
+                setBudgetSubmitting(true);
+                // Create client only when needed (lazy initialization)
+                const supabase = createClient();
+                const { data: { user } } = await supabase.auth.getUser();
+                if (!user) {
+                  alert("You must be signed in to create a budget.");
+                  return;
+                }
+                const payload = budgetFieldConfig.reduce((acc, field) => {
+                  acc[field.key] = parseFloat(budgetForm[field.key] || "0") || 0;
+                  return acc;
+                }, {} as Record<BudgetFieldKey, number>);
+                const { error } = await supabase
+                  .from("finance_budgets")
+                  .insert({
+                    user_id: user.id,
+                    ...payload,
+                  });
+                if (error) throw error;
+                alert("Budget saved successfully!");
+                setBudgetDialogOpen(false);
+                setBudgetForm(createEmptyBudgetForm());
+              } catch (error) {
+                console.error("Failed to save budget", error);
+                alert("Could not save budget. Please try again.");
+              } finally {
+                setBudgetSubmitting(false);
+              }
+            }}
+          >
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {budgetFieldConfig.map(({ key, label }) => (
+                <div key={key} className="space-y-2">
+                  <label className="block text-sm font-medium text-white/80">{label}</label>
+                  <Input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={budgetForm[key]}
+                    onChange={(event) =>
+                      setBudgetForm((prev) => ({
+                        ...prev,
+                        [key]: event.target.value,
+                      }))
+                    }
+                    placeholder="0.00"
+                    className="border-white/20 bg-white/10 text-white placeholder:text-white/50 focus-visible:ring-primary"
+                  />
+                </div>
+              ))}
+            </div>
+            <DialogFooter className="sm:justify-between">
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => {
+                  setBudgetDialogOpen(false);
+                  setBudgetForm(createEmptyBudgetForm());
+                }}
+                className="text-white hover:bg-white/10"
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                disabled={budgetSubmitting}
+                className="bg-primary text-primary-foreground hover:bg-primary/90"
+              >
+                {budgetSubmitting ? "Saving..." : "Save Budget"}
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

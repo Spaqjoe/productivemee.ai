@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { CardButton } from "@/components/ui/card-button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { RxPlus, RxChevronLeft, RxChevronRight } from "react-icons/rx";
@@ -355,14 +356,10 @@ export default function CalendarPage() {
               <h1 className="text-3xl font-bold">Calendar</h1>
               <p className="text-muted-foreground">Manage your events and schedule</p>
             </div>
-            <Button
-              variant="default"
-              onClick={handleCreateEvent}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
-            >
-              <RxPlus className="mr-2" />
-              New Event
-            </Button>
+            <CardButton onClick={handleCreateEvent}>
+              <RxPlus className="h-4 w-4" />
+              <span>New Event</span>
+            </CardButton>
           </div>
 
           {/* View Tabs */}
@@ -479,53 +476,55 @@ export default function CalendarPage() {
       {/* Mobile layout */}
       <div className="md:hidden space-y-4">
         {/* Horizontal mini-calendar strip */}
-        <div className="mx-4 mt-2 bg-[hsl(var(--card))] rounded-lg p-3">
-          <div className="flex items-center justify-between mb-2">
+        <Card className="mx-4 mt-2">
+          <CardHeader className="flex items-center justify-between pb-3 pt-5">
             <Button variant="ghost" size="icon" onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 7))}>
               <RxChevronLeft className="h-5 w-5" />
             </Button>
-            <div className="text-sm font-semibold text-foreground">
+            <CardTitle className="text-base font-semibold">
               {currentDate.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })}
-            </div>
+            </CardTitle>
             <Button variant="ghost" size="icon" onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7))}>
               <RxChevronRight className="h-5 w-5" />
             </Button>
-          </div>
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-            {getWeekDays().map((d, idx) => {
-              const isToday = d.toDateString() === new Date().toDateString();
-              const isSelected = d.toDateString() === currentDate.toDateString();
-              return (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentDate(new Date(d))}
-                  className={cn(
-                    "flex flex-col items-center justify-center min-w-[44px]",
-                    isSelected ? "text-[hsl(var(--primary))]" : "text-foreground"
-                  )}
-                >
-                  <span className="text-[10px] text-muted-foreground">
-                    {daysOfWeek[d.getDay()]}
-                  </span>
-                  <span
+          </CardHeader>
+          <CardContent className="pt-0 pb-4">
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+              {getWeekDays().map((d, idx) => {
+                const isToday = d.toDateString() === new Date().toDateString();
+                const isSelected = d.toDateString() === currentDate.toDateString();
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentDate(new Date(d))}
                     className={cn(
-                      "mt-1 h-8 w-8 flex items-center justify-center rounded-full",
-                      isSelected ? "bg-primary text-primary-foreground" : "bg-background text-foreground border border-border"
+                      "flex flex-col items-center justify-center min-w-[44px]",
+                      isSelected ? "text-[hsl(var(--primary))]" : "text-foreground"
                     )}
                   >
-                    {d.getDate()}
-                  </span>
-                  <span
-                    className={cn(
-                      "mt-1 h-1 w-6 rounded-full",
-                      isToday ? "bg-primary" : "bg-transparent"
-                    )}
-                  />
-                </button>
-              );
-            })}
-          </div>
-        </div>
+                    <span className="text-[10px] text-muted-foreground">
+                      {daysOfWeek[d.getDay()]}
+                    </span>
+                    <span
+                      className={cn(
+                        "mt-1 h-8 w-8 flex items-center justify-center rounded-full",
+                        isSelected ? "bg-primary text-primary-foreground" : "bg-background text-foreground border border-border"
+                      )}
+                    >
+                      {d.getDate()}
+                    </span>
+                    <span
+                      className={cn(
+                        "mt-1 h-1 w-6 rounded-full",
+                        isToday ? "bg-primary" : "bg-transparent"
+                      )}
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Main calendar resized for mobile */}
         <div className="px-4">

@@ -12,6 +12,13 @@ export function StocksWidget() {
     const fetchStocks = async () => {
       try {
         const response = await fetch("/api/stocks?symbols=SPY,AAPL,TSLA");
+        const contentType = response.headers.get("content-type") ?? "";
+
+        if (!response.ok || !contentType.includes("application/json")) {
+          const errorBody = await response.text();
+          throw new Error(`Stocks API response invalid (${response.status}). Body: ${errorBody.slice(0, 120)}`);
+        }
+
         const data = await response.json();
         setStocks(data);
       } catch (error) {
